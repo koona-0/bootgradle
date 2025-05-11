@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판 리스트 출력</title>
+</head>
+<style>
+	/* 새로운 공지글이 등록되었을 경우 메세지를 출력하는 역할 */
+	.popmsg{
+		position:absolute;
+		right:5%;
+		bottom:5%;
+		width:250px;
+		height: 50px;
+		background-color: gray;
+		border-radius:10px;
+		color:white;
+		text-align: center;
+		line-height: 50px;		
+		animation : fade 2s;
+			opacity : 0;
+		display:none;
+	}
+	
+	@keyframes fade{
+		from {
+			opacity : 1;
+			display:block;
+		}to{
+			opacity : 0;
+			display:none;
+		}
+	}
+
+    /* 상단 메뉴 스타일 */
+    nav {
+        background-color: #333;
+        padding: 10px 0;
+    }
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 0 15px;
+    }
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+        color: #ffcc00;
+    }
+</style>
+<style th:replace="~{/notice_list.html :: styles}"></style>
+<body>
+
+<div class="popmsg" id="popmsg">새로운 글이 등록되었습니다.</div>
+<div th:insert="~{/top.html :: menu}"></div>
+<br><br>
+<!-- 
+<div th:text="${pdname}"></div>
+<br><br>
+<span>[[${pdname}]]</span>
+-->
+<div th:insert="~{/notice_list.html :: tables}"></div>
+<div th:insert="~{/notice_list.html :: pageing}"></div>
+
+<!-- 
+<input type="button" value="시작" onclick="start()"><br>
+<input type="button" value="종료" onclick="stop()"><br>
+-->
+
+
+</body>
+
+
+<script>
+var ea = "[[${ea}]]";	//jstl은 $중괄호만써도되는데 타임리프는 [[도 필요
+console.log("ea : " + ea);
+
+var timer;
+//setTimeout : 한번 적용 후 정지하는 타임 함수 단, 재귀형태로 사용시 반복  
+//setInterval : 한번 적용시 지속적으로 반복실행하는 형태의 타임함수 
+
+/*
+//javascript async+await 비동기 
+async function start(){
+	//ajax => fetch => 5초에 한번씩 서버와 통신
+	
+	//async 비동기 : ajax는 기본적으로 비동기  
+	//sync 동기 
+	//await => async와 함께 사용 
+	
+	await fetch("./eacheck.do?ea="+ea)
+	.then((aa)=>{
+		return aa.text();
+	}).then((bb)=>{
+		if(bb=="ok"){
+			console.log(bb);
+			location.reload();
+		}
+	}).catch((error)=>{
+		//ajax로 보냈는데 백에서 쓰레드슬립하면 바로 못받아서 캐치로 빠져버림 
+		alert("서비스 장애로 인하여 페이지 오류 발생");
+	});
+	
+	timer = setTimeout(start,5000);
+	//timer = setInterval(start,1000);
+}
+*/
+
+var popmsg = document.querySelector("#popmsg");
+
+//async+await 동기 (pending : 통신 발생시 서버의 응답을 기다리는 상황)
+async function start(){
+	try{
+		popmsg.style.display = "none";
+		var res = await fetch("./eacheck.do?ea="+ea);
+		var data = await res.text();
+		console.log("data : "+data);
+		
+		if(data=="ok"){
+			//location.reload();	//신규 등록글을 메세지로 출력 
+			popmsg.style.display = "block";
+		}else if(data == "error"){
+			alert("서비스 장애로 인하여 페이지 오류 발생");
+		}
+		
+		timer = setTimeout(start,5000);
+		
+	}catch(error){
+		console.log("error : "+error);
+		if(error != "" || error != null){
+			alert("서비스 장애로 인하여 페이지 오류 발생");
+		}
+	}
+}
+
+
+
+setTimeout(start,1000);
+
+function stop(){
+	clearTimeout(timer);
+	//clearInterval(timer);
+	
+}
+</script>
+</html>

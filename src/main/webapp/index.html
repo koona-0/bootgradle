@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>온라인 투표</title>
+</head>
+<body>
+
+	<form id="frm">
+		<p>자신이 가장 재미있어하는 과목</p>
+		<ol>
+			<li><input type="radio" name="poll" value="1">JAVA</li>
+			<li><input type="radio" name="poll" value="2">Spring</li>
+			<li><input type="radio" name="poll" value="3">Spring-boot</li>
+		</ol>
+		<input type="button" value="제출" onclick="pollok()">
+	</form>
+
+</body>
+<script>
+// () =>  화살표 표현식 
+var aaa = function (a,b){
+	
+}
+
+var aaa = (a,b) =>{
+	
+}
+
+var aaa = {
+		name : "aaa",
+		ajax : function(){
+			console.log("test");
+		}
+		
+}
+
+var aaa = {
+		name : "aaa",
+		ajax : () => {
+			console.log("test2");
+		}
+		
+}
+
+
+var pollok = ()=>{
+	let ea = frm.poll.length;
+	let ck = false;
+	
+	for(var a=0; a<ea; a++){
+		if(frm.poll[a].checked==true){
+			ck = true;
+		}
+	}
+	
+	if(ck==true){
+	frm.method="post";
+	frm.action="./pollok.do"
+	frm.submit();
+		
+	}else{
+		alert("선택해주세요");
+	}
+	
+}
+</script>
+</html>

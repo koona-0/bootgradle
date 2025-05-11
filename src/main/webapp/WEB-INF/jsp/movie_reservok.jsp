@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화예매 [좌석배치 선택]</title>
+    <link rel="stylesheet" href="./movie_seat.css">
+</head>
+<body>
+    <div class="seat-selection">
+        <h1>좌석 배치도</h1>
+        <div class="screen">스크린</div>
+        <div class="seats">
+            <div class="row">
+                <!-- 
+                AI가 만든거에 type="button" 없어서 버튼누르자마자 폼으로 제출돼버림 
+                data라는 속성은 없음 ECMA를 쓴다는 의미  
+                -->
+                <button type="button" class="seat" data="1">A1</button>
+                <button type="button" class="seat" data="2">A2</button>
+                <button type="button" class="seat" data="3">A3</button>
+                <button type="button" class="seat" data="4">A4</button>
+            </div>
+            <div class="row">
+                <button type="button" class="seat" data="5">B1</button>
+                <button type="button" class="seat" data="6">B2</button>
+                <button type="button" class="seat" data="7">B3</button>
+                <button type="button" class="seat" data="8">B4</button>
+            </div>
+            <div class="row">
+                <button type="button" class="seat" data="9">C1</button>
+                <button type="button" class="seat" data="10">C2</button>
+                <button type="button" class="seat" data="11">C3</button>
+                <button type="button" class="seat" data="12">C4</button>
+            </div>
+        </div>
+        <div class="legend">
+            <span class="available">사용 가능</span>
+            <span class="selected">선택됨</span>
+            <span class="occupied">사용 중</span>
+        </div><br><br>
+        <button type="button" onclick="">예매 취소</button>
+        <button type="button" onclick="movie_ok()">예매 확정</button>
+    </div>
+    
+    <form id="frm" method="post" action="./movie_reservok2.do">
+    <input type="hidden" name="seat_data" value="">
+    </form>
+    
+    <script>
+    //예매 인원수를 백엔드에서 받아옴 
+    const person = "${person}";
+    console.log(person);
+    </script>
+    
+    <script src="./movie_seat.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 아이디 실시간 통신</title>
+</head>
+<body>
+<form >
+<!-- onkeypress는 한템포 느리게 반영됨 -->
+<input type="text" id="mid" name="mid" onkeyup="idcheck(this.value)">
+<input type="button" value="가입">
+<div style="color:red;" id="msg"></div>
+
+</form>
+</body>
+<script>
+var msg = document.querySelector("#msg");	//div 오브젝트 id를 로드 
+
+var idcheck = async (id) => {
+	var mid = id.replaceAll(" ","");	//공백 삭제 
+	var idea = mid.length;
+	if(idea > 2){
+		try{
+			//ajax 동기화 post 통신 
+			var call_id = await fetch("./idcheck.do",{
+				method : "post",
+				headers : {"content-type":"application/x-www-form-urlencoded"},
+				body : "mid="+mid
+				
+			});
+			var data = await call_id.text();	//Back-end API에서 결과값을 받음 
+			if(data=="ok"){	//사용 가능한 아이디 
+				msg.innerText = "사용 가능한 아이디입니다";
+			}else if(data=="no"){	//중복 아이디 
+				msg.innerText = "사용 불가능한 아이디입니다";
+				
+			}
+			
+			
+			console.log(data);
+		}catch(error){
+			console.log(error);
+			
+		}
+	}else{
+		msg.innerText = "3글자 이상 입력해주세요";
+		
+	}
+}
+</script>
+</html>

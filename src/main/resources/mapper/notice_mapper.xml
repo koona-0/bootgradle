@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.koo.notice_mapper">
+
+<!-- Oracle -->
+<select id="notice_list" resultType="kr.co.koo.notice.notice_DTO">
+select nidx,subject,writer,nview,ndate from notice order by nidx desc
+</select>
+
+<select id="notice_count" resultType="Integer">
+select count(*) as cnt from notice
+</select>
+
+<select id="test_member" resultType="Integer" parameterType="String">
+select count(*) as cnt from testmember where mid=#{mid}
+</select>
+
+</mapper>

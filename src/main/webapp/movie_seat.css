@@ -1,0 +1,73 @@
+.seat-selection {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.screen {
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #ccc;
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.seats {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+/* 예매완료된 좌석 */
+.seat_comp{
+    background-color: #717070 !important;
+}
+
+.seat {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.seat.occupied {
+    background-color: #d9534f;
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    background-color: #f0ad4e;
+}
+
+.legend {
+    margin-top: 20px;
+}
+
+.legend span {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.legend .available {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.legend .selected {
+    background-color: #f0ad4e;
+    color: white;
+}
+
+.legend .occupied {
+    background-color: #d9534f;
+    color: white;
+}

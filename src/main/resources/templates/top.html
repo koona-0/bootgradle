@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>thymeleaf 샘플페이지</title>
+<style>
+    /* 상단 메뉴 스타일 */
+    nav {
+        background-color: #333;
+        padding: 10px 0;
+    }
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 0 15px;
+    }
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+        color: #ffcc00;
+    }
+</style>
+</head>
+<body>
+<nav th:fragment="menu">
+    <ul>
+        <li><a href="/new-products">신규상품</a></li>
+        <li><a href="/event-products">이벤트상품</a></li>
+        <li><a href="/md-recommendations">MD추천</a></li>
+        <li><a href="/notices">공지사항</a></li>
+    </ul>
+</nav>
+</body>
+</html>

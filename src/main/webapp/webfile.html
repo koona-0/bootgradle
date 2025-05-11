@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>파일업로드 - Server</title>
+</head>
+<body>
+
+<form id="frm" method="POST" action="./webfileok.do" enctype="multipart/form-data">
+단일 파일 업로드 : <input type="file" name="file1"><br>
+<input type="button" value="전송" onclick="fileok()">
+</form>
+
+</body>
+<script>
+function fileok(){
+	frm.submit();
+}
+</script>
+</html>

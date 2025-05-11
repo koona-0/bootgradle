@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 예매 시스템</title>
+    <link rel="stylesheet" href="./movie_main.css">
+</head>
+<body>
+    <h1>영화 예매 시스템</h1>
+    <form id="frm" action="./movie_reservok.do" method="POST" onsubmit="return reserve()">
+    	<!-- moviecode : 영화의 고유 번호 -->
+    	<input type="hidden" name="moviecode" value="403">
+    	<!-- usercode : 예매고객의 고유 번호 (js에서 난수로 생성 -->
+    	<input type="hidden" name="usercode" value="">
+    
+        <label for="name">고객명</label>
+        <input type="text" id="name" name="mname" placeholder="이름을 입력하세요" required>
+        
+        <label for="name">영화명</label>
+        <input type="text" id="name" name="movienm" value="거룩한 밤 : 데몬 헌터스" readonly>
+<!-- 
+        <label for="movie">영화명</label>
+        <select id="movie" name="movie" required>
+            <option value="" disabled selected>영화를 선택하세요</option>
+            <option value="movie1">거룩한 밤 : 데몬 헌터스</option>
+            <option value="movie2">영화 2</option>
+            <option value="movie3">영화 3</option>
+        </select>
+ -->
+
+        <label for="date">예매일자</label>
+        <input type="date" id="date" name="mdate" required>
+
+        <label for="time">예매시간</label>
+        <select id="time" name="mtime">
+        <option value="" disabled selected>예매 시간을 선택하세요</option>
+        <option value="10:00">오전 10:00</option>
+        <option value="13:00">오후 13:00</option>
+        <option value="16:00">오후 16:00</option>
+        <option value="20:00">오후 20:00</option>
+        </select>
+
+        <label for="people">인원수</label>
+        <input type="text" id="people" name="mperson" placeholder="인원수를 입력하세요" min="1" required>
+
+        <button type="submit">예매하기</button>
+    </form>
+</body>
+<script src="./movie_main.js?v=1"></script>
+</html>

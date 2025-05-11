@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.koo.mapper">
+
+<!-- 본서버의 MariaDB mrp 데이터베이스  -->
+<select id="movie_all" resultType="kr.co.koo.movie_DTO">
+select * from movie_res order by midx desc
+</select>
+
+<!-- 클라우드서버의 Mysql webapi 데이터베이스 -->
+<select id="store_all" resultType="kr.co.koo.store_DTO">
+select * from store order by sidx desc
+</select>
+
+<!-- Oracle -->
+<select id="member_all" resultType="kr.co.koo.member_DTO">
+select * from MEMBERSHIP order by MIDX desc
+</select>
+
+</mapper>
